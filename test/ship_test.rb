@@ -21,16 +21,13 @@ class ShipTest < MiniTest::Test
     assert_equal 3, @cruiser.length
   end
 
-  def ship
+  def test_cruiser_health
+    assert_equal 3, @cruiser.health
+  end
 
-  end 
+
 end
 
-
-
-# pry(main)> cruiser.health
-# #=> 3
-#
 # pry(main)> cruiser.sunk?
 # #=> false
 #
