@@ -8,5 +8,13 @@ class Ship
   def health
     @length
   end
-  
+
+  def sunk?
+    @length == 0
+  end
+
+  def hit
+    @length -= 1
+  end
+
 end
