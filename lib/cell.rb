@@ -8,11 +8,11 @@ class Cell
   end
 
   def empty?
-    true
+    @ship.nil?
   end
 
-  def place_ship(x)
-    @ship = x
+  def place_ship(ship)
+    @ship = ship
   end
 
 end

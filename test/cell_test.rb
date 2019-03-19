@@ -23,12 +23,6 @@ class CellTest < MiniTest::Test
     assert_nil cell.ship
   end
 
-  def test_cell_is_empty_by_default
-    cell = Cell.new("B4")
-
-    assert cell.empty?
-  end
-
   def test_place_ship_adds_ship_to_cell
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
@@ -37,12 +31,13 @@ class CellTest < MiniTest::Test
     assert_equal cruiser, cell.ship
   end
 
-end
+  def test_empty_by_default_and_not_after_place_ship
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
 
-# pry(main)> cell.place_ship(cruiser)
-#
-# pry(main)> cell.ship
-# # => #<Ship:0x00007f84f0891238...>
-#
-# pry(main)> cell.empty?
-# # => false
+    assert cell.empty?
+    cell.place_ship(cruiser)
+    refute cell.empty?
+  end
+
+end
