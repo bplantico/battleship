@@ -17,14 +17,19 @@ class CellTest < MiniTest::Test
     assert_equal "B4", cell.coordinate
   end
 
-end
+  def test_ship_method_returns_nil_by_default
+    cell = Cell.new("B4")
 
-# pry(main)> cell.coordinate
-# # => "B4"
-#
-# pry(main)> cell.ship
-# # => nil
-#
+    assert_nil cell.ship
+  end
+
+  def test_cell_is_empty_by_default
+    cell = Cell.new("B4")
+    
+    assert cell.empty?
+  end
+
+end
 # pry(main)> cell.empty?
 # # => true
 #
