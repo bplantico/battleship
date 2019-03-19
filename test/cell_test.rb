@@ -25,17 +25,20 @@ class CellTest < MiniTest::Test
 
   def test_cell_is_empty_by_default
     cell = Cell.new("B4")
-    
+
     assert cell.empty?
   end
 
+  def test_place_ship_adds_ship_to_cell
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+
+    cell.place_ship(cruiser)
+    assert_equal cruiser, cell.ship
+  end
+
 end
-# pry(main)> cell.empty?
-# # => true
-#
-# pry(main)> cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0891238...>
-#
+
 # pry(main)> cell.place_ship(cruiser)
 #
 # pry(main)> cell.ship
