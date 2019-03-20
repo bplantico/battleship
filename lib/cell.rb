@@ -21,18 +21,17 @@ class Cell
   end
 
   def render(reveal = false)
-
-# If argument is true, show the S block
-# If argument is false, show dot block
-    if @fired_upon == false && @empty == false && reveal == false
-      "."
-    elsif @fired_upon == false && @empty == false
-      "S"
-    elsif @fired_upon == false && @empty == true
+     if @fired_upon == false && @empty == true
       "."
     elsif @fired_upon == true && @empty == true
       "M"
-    else  @fired_upon == true && @empty == false
+    elsif @ship.sunk?
+      "X"
+    elsif @fired_upon == false && @empty == false && reveal == false
+      "."
+    elsif @fired_upon == false && @empty == false
+      "S"
+    else @fired_upon == true && @empty == false
       "H"
     end
   end

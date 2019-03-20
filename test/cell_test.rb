@@ -67,7 +67,7 @@ class CellTest < MiniTest::Test
   def test_render_changes_to_m
     cell_1 = Cell.new("B4")
     cell_1.fire_upon
-# require "pry"; binding.pry
+
     assert_equal "M", cell_1.render
   end
 
@@ -78,39 +78,28 @@ class CellTest < MiniTest::Test
 
     assert_equal ".", cell.render
     assert_equal "S", cell.render(true)
+  end
 
+  def test_cruiser_sunk
+    cell = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    cell.fire_upon
+    cell.fire_upon
+
+    refute cruiser.sunk?
+    cell.fire_upon
+    assert cruiser.sunk?
+  end
+
+  def test_render_returns_X_when_ship_sunk
+    cell = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    cell.fire_upon
+    cell.fire_upon
+    cell.fire_upon
+    assert_equal "X", cell.render
   end
 
 end
-# pry(main)> cell_2 = Cell.new("C3")
-# # => #<Cell:0x00007f84f0b29d10...>
-#
-# pry(main)> cruiser = Ship.new("Cruiser", 3)
-# # => #<Ship:0x00007f84f0ad4fb8...>
-#
-# pry(main)> cell_2.place_ship(cruiser)
-#
-# pry(main)> cell_2.render
-# # => "."
-#
-# # Indicate that we want to show a ship with the optional argument
-# pry(main)> cell_2.render(true)
-# # => "S"
-#
-# pry(main)> cell_2.fire_upon
-#
-# pry(main)> cell_2.render
-# # => "H"
-#
-# pry(main)> cruiser.sunk?
-# # => false
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.hit
-#
-# pry(main)> cruiser.sunk?
-# # => true
-#
-# pry(main)> cell_2.render
-# # => "X"
