@@ -70,12 +70,17 @@ class CellTest < MiniTest::Test
     assert_equal "M", cell_1.render
   end
 
+  def test_render_returns_dot_again
+    cell_2 = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+
+
+    assert_equal ".", cell_2.render
+    assert_equal "S", cell_2.render(true)
+
+  end
+
 end
-# pry(main)> cell_1.fire_upon
-#
-# pry(main)> cell_1.render
-# # => "M"
-#
 # pry(main)> cell_2 = Cell.new("C3")
 # # => #<Cell:0x00007f84f0b29d10...>
 #
