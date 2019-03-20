@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'minitest/emoji'
+require 'minitest/pride'
 require 'pry'
 require './lib/ship'
 require './lib/cell'
@@ -40,4 +40,32 @@ class CellTest < MiniTest::Test
     refute cell.empty?
   end
 
+  def test_if_cell_fired_upon
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    assert_equal false, cell.fired_upon?
+  end
+
+  def test_if_cell_when_fired_loses_health
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    cell.fire_upon
+
+    assert_equal 2, cell.ship.health
+    assert_equal true, cell.fired_upon?
+  end
 end
+
+#
+# pry(main)> cell.fired_upon?
+# # => false
+#
+# pry(main)> cell.fire_upon
+#
+# pry(main)> cell.ship.health
+# # => 2
+#
+# pry(main)> cell.fired_upon?
+# # => true
