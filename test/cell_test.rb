@@ -43,6 +43,7 @@ class CellTest < MiniTest::Test
   def test_if_cell_fired_upon
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
+
     cell.place_ship(cruiser)
     assert_equal false, cell.fired_upon?
   end
@@ -56,16 +57,49 @@ class CellTest < MiniTest::Test
     assert_equal 2, cell.ship.health
     assert_equal true, cell.fired_upon?
   end
-end
 
-#
-# pry(main)> cell.fired_upon?
-# # => false
-#
-# pry(main)> cell.fire_upon
-#
-# pry(main)> cell.ship.health
-# # => 2
-#
-# pry(main)> cell.fired_upon?
-# # => true
+  def test_render_returns_dot
+    cell_1 = Cell.new("B4")
+
+    assert_equal ".", cell_1.render
+  end
+
+  def test_render_changes_to_m
+    cell_1 = Cell.new("B4")
+    cell_1.fire_upon
+
+    assert_equal "M", cell_1.render
+  end
+
+  def test_render_returns_optional_S
+    cell = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+
+    assert_equal ".", cell.render
+    assert_equal "S", cell.render(true)
+  end
+
+  def test_cruiser_sunk
+    cell = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    cell.fire_upon
+    cell.fire_upon
+
+    refute cruiser.sunk?
+    cell.fire_upon
+    assert cruiser.sunk?
+  end
+
+  def test_render_returns_X_when_ship_sunk
+    cell = Cell.new("C3")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    cell.fire_upon
+    cell.fire_upon
+    cell.fire_upon
+    assert_equal "X", cell.render
+  end
+
+end
