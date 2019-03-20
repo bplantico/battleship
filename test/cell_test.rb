@@ -44,7 +44,6 @@ class CellTest < MiniTest::Test
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
-    binding.pry
     assert_equal false, cell.fired_upon?
   end
 
