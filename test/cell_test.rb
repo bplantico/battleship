@@ -43,6 +43,7 @@ class CellTest < MiniTest::Test
   def test_if_cell_fired_upon
     cell = Cell.new("B4")
     cruiser = Ship.new("Cruiser", 3)
+
     cell.place_ship(cruiser)
     assert_equal false, cell.fired_upon?
   end
@@ -66,17 +67,17 @@ class CellTest < MiniTest::Test
   def test_render_changes_to_m
     cell_1 = Cell.new("B4")
     cell_1.fire_upon
-
+# require "pry"; binding.pry
     assert_equal "M", cell_1.render
   end
 
-  def test_render_returns_dot_again
-    cell_2 = Cell.new("C3")
+  def test_render_returns_optional_S
+    cell = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
 
-
-    assert_equal ".", cell_2.render
-    assert_equal "S", cell_2.render(true)
+    assert_equal ".", cell.render
+    assert_equal "S", cell.render(true)
 
   end
 

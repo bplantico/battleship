@@ -2,14 +2,12 @@ class Cell
   attr_reader :coordinate,
               :ship,
               :fired_upon,
-              :render,
               :empty
 
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = ship
     @fired_upon = false
-    @render = "."
     @empty = true
   end
 
@@ -22,20 +20,34 @@ class Cell
     @ship = ship
   end
 
+  def render(reveal = false)
+
+# If argument is true, show the S block
+# If argument is false, show dot block
+    if @fired_upon == false && @empty == false && reveal == false
+      "."
+    elsif @fired_upon == false && @empty == false
+      "S"
+    elsif @fired_upon == false && @empty == true
+      "."
+    elsif @fired_upon == true && @empty == true
+      "M"
+    else  @fired_upon == true && @empty == false
+      "H"
+    end
+  end
+
   def fired_upon?
      @fired_upon
   end
 
   def fire_upon
-
     if @empty
-      @render = "M"
+      @fired_upon = true
     else
       @ship.hit
-      @render = "H"
       @fired_upon = true
     end
-
   end
 
 end
