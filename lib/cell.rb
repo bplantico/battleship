@@ -15,4 +15,13 @@ class Cell
     @ship = ship
   end
 
+  def fired_upon?
+     @ship## false when inputed length == length
+    ## true when fire_upon
+  end
+
+  def fire_upon
+    @ship.hit
+  end
+
 end
