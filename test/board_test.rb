@@ -28,4 +28,34 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("E1")
     assert_equal false, board.valid_coordinate?("A22")
   end
+
+  def test_valid_placement_method_returns_false_when_too_few_coordinates_given
+    board = Board.new
+    board.create_cells
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    refute board.valid_placement?(cruiser, ["A1", "A2"])
+    refute board.valid_placement?(submarine, ["A2", "A3", "A4"])
+    assert board.valid_placement?(cruiser, ["A2", "A3", "A4"])
+    assert board.valid_placement?(submarine, ["A1", "A2"])
+  end
 end
+
+# pry(main)> board.valid_placement?(cruiser, ["A1", "A2"])
+# # => false
+#
+# pry(main)> board.valid_placement?(submarine, ["A2", "A3", "A4"])
+# # => false
+#
+# pry(main)> board.valid_placement?(cruiser, ["A1", "A2", "A4"])
+# # => false
+#
+# pry(main)> board.valid_placement?(submarine, ["A1", "C1"])
+# # => false
+#
+# pry(main)> board.valid_placement?(cruiser, ["A3", "A2", "A1"])
+# # => false
+#
+# pry(main)> board.valid_placement?(submarine, ["C1", "B1"])
+# # => false
