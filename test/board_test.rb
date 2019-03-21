@@ -13,14 +13,13 @@ class BoardTest < Minitest::Test
 
   def test_if_cells_creates_16_values
     board = Board.new
-    board.create_cells
+
     assert_equal 16, board.cells.count
     assert_instance_of Cell, board.cells["D3"]
   end
 
   def test_if_coordinate_valid
     board = Board.new
-    board.create_cells
 
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
@@ -29,9 +28,8 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("A22")
   end
 
-  def test_valid_placement_method_returns_false_when_too_few_coordinates_given
+  def test_valid_placement_method_when_wrong_length
     board = Board.new
-    board.create_cells
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
 
@@ -40,6 +38,21 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(cruiser, ["A2", "A3", "A4"])
     assert board.valid_placement?(submarine, ["A1", "A2"])
   end
+
+  def test_valid_placement_for_consecutive_coordinates
+    skip
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+require "pry"; binding.pry
+    refute board.valid_placement?(cruiser, ["A1", "A2", "A4"])
+    refute board.valid_placement?(submarine, ["A1", "C1"])
+    refute board.valid_placement?(cruiser, ["A3", "A2", "A1"])
+    refute board.valid_placement?(submarine, ["C1", "B1"])
+
+  end
+
+
 end
 
 # pry(main)> board.valid_placement?(cruiser, ["A1", "A2"])
