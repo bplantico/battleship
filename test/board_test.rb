@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/board'
 require './lib/cell'
 require './lib/ship'
+require 'pry'
 
 class BoardTest < Minitest::Test
   def test_it_exists
@@ -21,7 +22,6 @@ class BoardTest < Minitest::Test
   def test_if_coordinate_valid
     board = Board.new
     board.create_cells
-
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
     assert_equal false, board.valid_coordinate?("A5")
