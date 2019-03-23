@@ -44,7 +44,6 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
 
-    refute board.valid_placement?(cruiser, ["E1", "E2", "E3"])
     refute board.valid_placement?(cruiser, ["A1", "A2", "A4"])
     refute board.valid_placement?(submarine, ["A1", "C1"])
     refute board.valid_placement?(cruiser, ["A3", "A2", "A1"])
@@ -81,5 +80,48 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(submarine, ["A1", "A2"])
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
+
+  # PLACING SHIPS
+
+  def test_place_ship_method
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    cell_1 = board.cells["A1"]
+    cell_2 = board.cells["A2"]
+    cell_3 = board.cells["A3"]
+
+
+    assert_instance_of Ship, cell_1.ship
+    assert_instance_of Ship, cell_2.ship
+    assert_instance_of Ship, cell_3.ship
+
+    assert cell_3.ship == cell_2.ship
+  end
+
+# pry(main)> board.place(cruiser, ["A1", "A2", "A3"])
+#
+# pry(main)> cell_1 = board.cells["A1"]
+# # => #<Cell:0x00007fcb0e1f66a8...>
+#
+# pry(main)> cell_2 = board.cells["A2"]
+# # => #<Cell:0x00007fcb0e1f6630...>
+#
+# pry(main)> cell_3 = board.cells["A3"]
+# # => #<Cell:0x00007fcb0e1f65b8...>
+#
+# pry(main)> cell_1.ship
+# # => #<Ship:0x00007fcb0e1ffa28...>
+#
+# pry(main)> cell_2.ship
+# # => #<Ship:0x00007fcb0e1ffa28...>
+#
+# pry(main)> cell_3.ship
+# # => #<Ship:0x00007fcb0e1ffa28...>
+#
+# pry(main)> cell_3.ship == cell_2.ship
+# # => true
 
 end
