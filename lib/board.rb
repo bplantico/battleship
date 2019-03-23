@@ -19,16 +19,16 @@ class Board
     @cells.include?(coordinate)
   end
 
-  def valid_placement?(ship, coordinates) #Returns True or False
-    if coordinates.count == ship.length
+  def valid_placement?(ship, coordinates)
+    if coordinates.count == ship.length && coordinates.all? do |coord|
+      @cells[coord].empty?
+    end
       letters = [].sort
       numbers = [].sort
 
       coordinates.each do |coord|
-        # if valid_coordinate?(coord)
           letters << coord[0]
           numbers << coord[1].to_i
-        # end
       end
 
       if letters.uniq.length == 1
