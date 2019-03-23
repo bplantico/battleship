@@ -130,4 +130,45 @@ class BoardTest < Minitest::Test
     assert_equal expected_player, board.render(true)
 
   end
+
+  def test_render_the_board__again
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    board.place(submarine, ["B2", "C2"])
+
+    board.cells["B2"].fire_upon
+    board.cells["C3"].fire_upon
+
+    expected_opp = "  1 2 3 4 \n" +
+                   "A . . . . \n" +
+                   "B . H . . \n" +
+                   "C . . M . \n" +
+                   "D . . . . \n"
+
+    assert_equal expected_opp, board.render
+
+    expected_player = "  1 2 3 4 \n" +
+                      "A S S S . \n" +
+                      "B . H . . \n" +
+                      "C . S M . \n" +
+                      "D . . . . \n"
+
+    assert_equal expected_player, board.render(true)
+
+    board.cells["C2"].fire_upon
+    board.cells["A1"].fire_upon
+    board.cells["A2"].fire_upon
+    board.cells["A3"].fire_upon
+
+    expected_player = "  1 2 3 4 \n" +
+                      "A X X X . \n" +
+                      "B . X . . \n" +
+                      "C . X M . \n" +
+                      "D . . . . \n"
+
+    assert_equal expected_player, board.render(true)
+
+  end
 end
