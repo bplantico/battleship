@@ -40,7 +40,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement_for_consecutive_coordinates
-
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -53,22 +52,34 @@ class BoardTest < Minitest::Test
 
   end
 
+  def test_if_valid_placement_works_vertical
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    refute board.valid_placement?(cruiser, ["A1", "A2", "A4"])
+    refute board.valid_placement?(submarine, ["A1", "C1"])
+    refute board.valid_placement?(cruiser, ["A3", "A2", "A1"])
+    assert_equal false, board.valid_placement?(submarine, ["C1", "B1"])
+  end
+
+  def test_if_valid_placement_works_diagonal
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
+    refute  board.valid_placement?(submarine, ["C2", "D3"])
+  end
+
+  def test_if_valid_placement_returns_true
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    
+
+  end
 end
 
-# pry(main)> board.valid_placement?(cruiser, ["A1", "A2"])
-# # => false
 #
-# pry(main)> board.valid_placement?(submarine, ["A2", "A3", "A4"])
-# # => false
-#
-# pry(main)> board.valid_placement?(cruiser, ["A1", "A2", "A4"])
-# # => false
-#
-# pry(main)> board.valid_placement?(submarine, ["A1", "C1"])
-# # => false
-#
-# pry(main)> board.valid_placement?(cruiser, ["A3", "A2", "A1"])
-# # => false
-#
-# pry(main)> board.valid_placement?(submarine, ["C1", "B1"])
-# # => false

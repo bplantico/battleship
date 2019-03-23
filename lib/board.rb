@@ -23,58 +23,24 @@ class Board
   # If true, then the length is valid.
 
   def valid_placement?(ship, coordinates) #Returns True or False
-    if   coordinates.count == ship.length
-          letters = []
-          numbers = [].sort
+    if coordinates.count == ship.length
+      letters = [].sort
+      numbers = [].sort
 
-          coordinates.each do |coord|
-            letters << coord[0]
-            numbers << coord[1].to_i
-          end
+      coordinates.each do |coord|
+        letters << coord[0]
+        numbers << coord[1].to_i
+      end
 
-          unique_letters = letters.uniq
-
-          unique_letters.length == 1
+      if letters.uniq.length == 1
           numbers.each_cons(2).all?{|x, y| y == x + 1}
+        elsif numbers.uniq.length == 1
+          letters.each_cons(2).all?{|x, y| y.ord == x.ord + 1}
         else
           false
-        end
-    # Do the ships overlap?
-    # If all pass above, then the placement is valid
+      end
+    else
+      false
+    end
   end
-
-  # def h_consec?(coordinates) # Are the cells consecutive?
-
-    # letters = []
-    # numbers = []
-    #
-    # coordinates.each do |coord|
-    #   letters = coord.first.sort
-    #   numbers = coord.last.sort
-    # end
-    #
-    # unique_letters = letters.uniq
-    #
-    # unique_letters.length == 1
-    # numbers.each_cons(2).all?{|x, y| y == x + 1}
-    # first_num = numbers.first.to_i
-    # later_nums = numbers.drop(1)
-    # later_nums.each do |num|
-    #   if num.to_i != first_num + 1
-    #     return false
-    #   else
-    #     first_num = num.to_i
-    #   end
-    # end
-    # return true
-  # end
-
-
-  # def valid_consecutive(ship, coordinates)
-  #   # H - Is the placement horizontal and consecutive?
-  #
-  #   # V - Is the placement vertical and consecutive?
-  #   # If H or V is true, then valid consecutive is true
-  # end
-
 end
