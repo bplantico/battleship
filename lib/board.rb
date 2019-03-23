@@ -19,9 +19,6 @@ class Board
     @cells.include?(coordinate)
   end
 
-  # Is the ship length the same length as the number of coordinates provided?
-  # If true, then the length is valid.
-
   def valid_placement?(ship, coordinates) #Returns True or False
     if coordinates.count == ship.length
       letters = [].sort
@@ -46,12 +43,10 @@ class Board
     end
   end
 
-# Given the name of a ship and a coordinates array of where to put it, place the ship into the cells.
   def place(ship, coordinates)
     coordinates.each do |coord|
       @cells[coord].place_ship(ship)
     end
   end
-
 
 end
