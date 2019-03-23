@@ -50,6 +50,24 @@ class Board
   end
 
   def render
+    comp_rendered_board = []
+    @cells.each_key do |key|
+      comp_rendered_board << @cells[key].render
+    end
+    p comp_rendered_board
+
+    player_rendered_board = []
+    @cells.each_key do |key|
+      player_rendered_board << @cells[key].render(true)
+    end
+    p player_rendered_board
+  end
+
+  #   letterstrt = []
+  #   @cells.each_key do |key|
+  #     letterstrt << @cells.each_cons(4)
+  #   end
+
   end
 
 end
