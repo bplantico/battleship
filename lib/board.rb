@@ -52,7 +52,7 @@ class Board
   end
 
   def render(reveal = false)
-    if reveal == true
+    if reveal
       player_rendered_board = ["  1"," 2"," 3"," 4", " \n"]
       player_rendered_board << "A " + "#{@cells["A1"].render(true)}" + " #{@cells["A2"].render(true)}" + " #{@cells["A3"].render(true)}" + " #{@cells["A4"].render(true)}" + " \n"
       player_rendered_board << "B " + "#{@cells["B1"].render(true)}" + " #{@cells["B2"].render(true)}" + " #{@cells["B3"].render(true)}" + " #{@cells["B4"].render(true)}" + " \n"
