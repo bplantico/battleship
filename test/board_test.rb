@@ -119,7 +119,7 @@ class BoardTest < Minitest::Test
                    "C . . . . \n" +
                    "D . . . . \n"
 
-    assert_equal expected, board.render
+    assert_equal expected_opp, board.render
 
     expected_player = "  1 2 3 4 \n" +
                       "A S S S . \n" +
@@ -127,7 +127,7 @@ class BoardTest < Minitest::Test
                       "C . . . . \n" +
                       "D . . . . \n"
 
-    assert_equal expected, board.render(true)
+    assert_equal expected_player, board.render(true)
 
   end
 # pry(main)> board.render
