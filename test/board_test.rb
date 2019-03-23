@@ -21,6 +21,7 @@ class BoardTest < Minitest::Test
 
   def test_if_coordinate_valid
     board = Board.new
+# require "pry"; binding.pry
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
     assert_equal false, board.valid_coordinate?("A5")
@@ -80,21 +81,30 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
 
-  def test_that_ship_can_be_placed_on_each_cell
+  # PLACING SHIPS
+
+  def test_place_ship_method
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
+
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
-    require 'pry'; binding.pry
-    
+
     assert_instance_of Ship, cell_1.ship
     assert_instance_of Ship, cell_2.ship
     assert_instance_of Ship, cell_3.ship
-    assert cell_3.ship == cell_2.ship
 
+    assert cell_3.ship == cell_2.ship
+  end
+
+  def test_if_valid_placement_returns_false_on_overlaps
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    submarine = Ship.new("Submarine", 2)
+    refute board.valid_placement?(submarine, ["A1", "B1"])
   end
 end
-
-#

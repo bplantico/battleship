@@ -25,8 +25,10 @@ class Board
       numbers = [].sort
 
       coordinates.each do |coord|
-        letters << coord[0]
-        numbers << coord[1].to_i
+        # if valid_coordinate?(coord)
+          letters << coord[0]
+          numbers << coord[1].to_i
+        # end
       end
 
       if letters.uniq.length == 1
@@ -41,8 +43,10 @@ class Board
     end
   end
 
-  def place(ship,coordinates)
-    
-
+  def place(ship, coordinates)
+    coordinates.each do |coord|
+      @cells[coord].place_ship(ship)
+    end
   end
+
 end
