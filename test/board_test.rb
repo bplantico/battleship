@@ -107,4 +107,32 @@ class BoardTest < Minitest::Test
     submarine = Ship.new("Submarine", 2)
     refute board.valid_placement?(submarine, ["A1", "B1"])
   end
+
+  def test_render_the_board
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+
+    expected_opp = "  1 2 3 4 \n" +
+                   "A . . . . \n" +
+                   "B . . . . \n" +
+                   "C . . . . \n" +
+                   "D . . . . \n"
+
+    assert_equal expected_opp, board.render
+
+    expected_player = "  1 2 3 4 \n" +
+                      "A S S S . \n" +
+                      "B . . . . \n" +
+                      "C . . . . \n" +
+                      "D . . . . \n"
+
+    assert_equal expected_player, board.render(true)
+
+  end
+# pry(main)> board.render
+# # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+#
+# pry(main)> board.render(true)
+# # => "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 end
