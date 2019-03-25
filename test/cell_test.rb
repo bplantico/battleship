@@ -101,5 +101,4 @@ class CellTest < MiniTest::Test
     cell.fire_upon
     assert_equal "X", cell.render
   end
-
 end

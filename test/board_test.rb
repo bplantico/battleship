@@ -130,9 +130,4 @@ class BoardTest < Minitest::Test
     assert_equal expected_player, board.render(true)
 
   end
-# pry(main)> board.render
-# # => "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-#
-# pry(main)> board.render(true)
-# # => "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n"
 end
