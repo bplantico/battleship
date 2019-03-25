@@ -24,10 +24,10 @@ class Board
     if coordinates.count == ship.length && coordinates.all? do |coord|
       @cells[coord].empty?
     end
-    
+
       letters = [].sort
       numbers = [].sort
-    
+
       coordinates.each do |coord|
           letters << coord[0]
           numbers << coord[1].to_i
@@ -58,7 +58,7 @@ class Board
       letters << cells[0]
       numbers << cells[1]
     end
-    board =  " #{numbers.uniq.join(" ")} \n"
+    board =  "  #{numbers.uniq.join(" ")} \n"
     letters.uniq.each do |let|
       board += "#{let} "
       numbers.uniq.each do |num|
@@ -70,4 +70,3 @@ class Board
     board
   end
 end
-   
