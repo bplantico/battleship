@@ -108,25 +108,26 @@ class BoardTest < Minitest::Test
     refute board.valid_placement?(submarine, ["A1", "B1"])
   end
 
-  def test_if_board_can_render_reveal_true_or_false
+  def test_render_the_board
     board = Board.new
-    cell = Cell.new("C3")
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
-    assert_equal " 1 2 3 4 \n" +
-    "A . . . . \n" +
-    "B . . . . \n" +
-    "C . . . . \n" +
-    "D . . . . \n", board.render
 
-    assert_equal " 1 2 3 4 \n" +
-    "A S S S . \n" +
-    "B . . . . \n" +
-    "C . . . . \n" +
-    "D . . . . \n", board.render(true)
+    expected_opp = "  1 2 3 4 \n" +
+                   "A . . . . \n" +
+                   "B . . . . \n" +
+                   "C . . . . \n" +
+                   "D . . . . \n"
+
+    assert_equal expected_opp, board.render
+
+    expected_player = "  1 2 3 4 \n" +
+                      "A S S S . \n" +
+                      "B . . . . \n" +
+                      "C . . . . \n" +
+                      "D . . . . \n"
+
+    assert_equal expected_player, board.render(true)
+
   end
-
-
-
-
 end

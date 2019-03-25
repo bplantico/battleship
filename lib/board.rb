@@ -20,17 +20,19 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
+    # Length check and overlap check
     if coordinates.count == ship.length && coordinates.all? do |coord|
       @cells[coord].empty?
     end
-      letters = []
-      numbers = []
-
+    
+      letters = [].sort
+      numbers = [].sort
+    
       coordinates.each do |coord|
           letters << coord[0]
           numbers << coord[1].to_i
       end
-
+      # Horizontal and vertical consecutive checks
       if letters.uniq.length == 1
           numbers.each_cons(2).all?{|x, y| y == x + 1}
         elsif numbers.uniq.length == 1
@@ -67,14 +69,5 @@ class Board
     end
     board
   end
-
 end
-    # a = "  1 2 3 4 \n" +
-    #
-    #
-    # b = "A #{@cells["A1"].render} \n" +
-    # c = "B #{@cells["A2"].render} \n" +
-    # "C #{@cells["A3"].render} \n" +
-    # "D #{@cells["A4"].render} \n"
-    #
-    # final_string = a + b + c + d + e
+   
