@@ -23,8 +23,8 @@ class Board
     if coordinates.count == ship.length && coordinates.all? do |coord|
       @cells[coord].empty?
     end
-      letters = [].sort
-      numbers = [].sort
+      letters = []
+      numbers = []
 
       coordinates.each do |coord|
           letters << coord[0]
@@ -36,10 +36,10 @@ class Board
         elsif numbers.uniq.length == 1
           letters.each_cons(2).all?{|x, y| y.ord == x.ord + 1}
         else
-          false
+          return  false
       end
     else
-      false
+      return false
     end
   end
 
@@ -49,4 +49,32 @@ class Board
     end
   end
 
+  def render(reveal = false)
+    letters = []
+    numbers = []
+    @cells.keys.each do |cells|
+      letters << cells[0]
+      numbers << cells[1]
+    end
+    board =  " #{numbers.uniq.join(" ")} \n"
+    letters.uniq.each do |let|
+      board += "#{let} "
+      numbers.uniq.each do |num|
+        coord = "#{let}#{num}"
+         board += "#{@cells[coord].render(reveal)} "
+      end
+      board += "\n"
+    end
+    board
+  end
+
 end
+    # a = "  1 2 3 4 \n" +
+    #
+    #
+    # b = "A #{@cells["A1"].render} \n" +
+    # c = "B #{@cells["A2"].render} \n" +
+    # "C #{@cells["A3"].render} \n" +
+    # "D #{@cells["A4"].render} \n"
+    #
+    # final_string = a + b + c + d + e
