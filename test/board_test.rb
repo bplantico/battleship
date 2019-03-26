@@ -169,6 +169,19 @@ class BoardTest < Minitest::Test
                       "D . . . . \n"
 
     assert_equal expected_player, board.render(true)
-
   end
+
+  def test_computer_places_ships
+    cpu_board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+
+    cpu_board.cpu_place(cruiser)
+    cpu_board.cpu_place(submarine)
+    puts cpu_board.render(true)
+# require "pry"; binding.pry
+    assert cpu_board.cells.values.any? { |cell| cell.ship == cruiser }
+    assert cpu_board.cells.values.any? { |cell| cell.ship == submarine }
+  end
+
 end

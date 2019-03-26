@@ -69,4 +69,17 @@ class Board
     end
     board
   end
+
+  def cpu_place(ship)
+    combinations = @cells.keys.repeated_combination(ship.length).to_a
+    sample = combinations.sample
+    # require "pry"; binding.pry
+    until valid_placement?(ship, sample) do
+      sample = combinations.sample
+    end
+    sample.each do |coord|
+      @cells[coord].place_ship(ship)
+    end
+  end
+
 end
