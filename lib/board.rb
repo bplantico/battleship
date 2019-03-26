@@ -20,7 +20,6 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    # Length check and overlap check
     if coordinates.count == ship.length && coordinates.all? do |coord|
       @cells[coord].empty?
     end
@@ -32,7 +31,7 @@ class Board
           letters << coord[0]
           numbers << coord[1].to_i
       end
-      # Horizontal and vertical consecutive checks
+
       if letters.uniq.length == 1
           numbers.each_cons(2).all?{|x, y| y == x + 1}
         elsif numbers.uniq.length == 1
@@ -73,7 +72,7 @@ class Board
   def cpu_place(ship)
     combinations = @cells.keys.repeated_combination(ship.length).to_a
     sample = combinations.sample
-    # require "pry"; binding.pry
+
     until valid_placement?(ship, sample) do
       sample = combinations.sample
     end
