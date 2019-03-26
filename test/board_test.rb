@@ -178,8 +178,8 @@ class BoardTest < Minitest::Test
 
     cpu_board.cpu_place(cruiser)
     cpu_board.cpu_place(submarine)
-    puts cpu_board.render(true)
-# require "pry"; binding.pry
+    cpu_board.render(true)
+
     assert cpu_board.cells.values.any? { |cell| cell.ship == cruiser }
     assert cpu_board.cells.values.any? { |cell| cell.ship == submarine }
   end
