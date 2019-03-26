@@ -6,8 +6,10 @@ require 'pry'
 
 player_board = Board.new
 ai_board = Board.new
-cruiser = Ship.new("Cruiser", 3)
-submarine = Ship.new("Submarine", 2)
+player_cruiser = Ship.new("Cruiser", 3)
+player_submarine = Ship.new("Submarine", 2)
+ai_cruiser = Ship.new("Cruiser", 3)
+ai_submarine = Ship.new("Submarine", 2)
 game = Game.new
 
 game.setup
