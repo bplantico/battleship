@@ -55,13 +55,9 @@ class Game
     puts "Please input two coordinates for the submarine (i.e. 'A1 A2'):"
     sub_position = gets.chomp.upcase.split(" ")
 
-    until sub_position.all?{ |coord| player_board.valid_coordinate?(coord) }
-      puts "Not all of those coordinates are on the board. Please try again."
-      sub_position = gets.chomp.upcase.split(" ")
-    end
-
-    until  player_board.valid_placement?(@player_submarine, sub_position)
-      puts "Those coordinates are invalid coordinates. Please try again."
+    until  sub_position.all?{ |coord| @player_board.valid_coordinate?(coord) } \
+      && @player_board.valid_placement?(@player_submarine, sub_position)
+        puts "Those coordinates are invalid coordinates. Please try again."
       sub_position = gets.chomp.upcase.split(" ")
     end
 
