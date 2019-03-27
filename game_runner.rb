@@ -6,4 +6,4 @@ require 'pry'
 
 game = Game.new
 
-game.setup
+game.main_menu

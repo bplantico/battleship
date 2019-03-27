@@ -24,8 +24,8 @@ class Board
       @cells[coord].empty?
     end
 
-      letters = [].sort
-      numbers = [].sort
+      letters = []
+      numbers = []
 
       coordinates.each do |coord|
           letters << coord[0]
