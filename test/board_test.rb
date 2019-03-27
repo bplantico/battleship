@@ -40,17 +40,6 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(submarine, ["A1", "A2"])
   end
 
-  # def test_valid_placement_method_when_coord_not_on_board
-  #   board = Board.new
-  #   cruiser = Ship.new("Cruiser", 3)
-  #   submarine = Ship.new("Submarine", 2)
-  #
-  #   refute board.valid_placement?(cruiser, ["E1", "E2"])
-  #   refute board.valid_placement?(submarine, ["A5", "A3", "A4"])
-  #   assert board.valid_placement?(cruiser, ["A2", "A3", "A4"])
-  #   assert board.valid_placement?(submarine, ["A1", "A2"])
-  # end
-
   def test_valid_placement_for_consecutive_coordinates
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
