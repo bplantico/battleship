@@ -22,14 +22,15 @@ class Board
   def valid_placement?(ship, coordinates)
     if coordinates.count == ship.length && coordinates.all? do |coord|
       @cells[coord].empty?
-    end
+      end
 
       letters = []
       numbers = []
 
       coordinates.each do |coord|
           letters << coord[0]
-          numbers << coord[1].to_i
+          numbers << coord.scan(/\d+/).join.to_i
+
       end
 
       if letters.uniq.length == 1
@@ -55,7 +56,7 @@ class Board
     numbers = []
     @cells.keys.each do |cells|
       letters << cells[0]
-      numbers << cells[1]
+      numbers << cells.scan(/\d+/).join.to_i
     end
     board =  "  #{numbers.uniq.join(" ")} \n"
     letters.uniq.each do |let|
