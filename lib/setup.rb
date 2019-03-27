@@ -37,18 +37,11 @@ class Game
     "The Cruiser is three units long and the Submarine is two units long.\n" +
     "Please input three coordinates for the cruiser (i.e. 'A1 A2 A3'):"
 
-
-
-    puts @player_board.render(true)
-
+    puts @player_board.render
     cruiser_position = gets.chomp.upcase.split(" ")
 
-    until cruiser_position.all?{|coord| player_board.valid_coordinate?(coord)}
-      puts "Not all of those coordinates are on the board. Please try again."
-      cruiser_position = gets.chomp.upcase.split(" ")
-    end
-
-    until  player_board.valid_placement?(@player_cruiser, cruiser_position)
+    until  cruiser_position.all?{|coord| player_board.valid_coordinate?(coord)}\
+       && player_board.valid_placement?(@player_cruiser, cruiser_position)
       puts "Those coordinates are invalid coordinates. Please try again."
       cruiser_position = gets.chomp.upcase.split(" ")
     end
@@ -116,19 +109,22 @@ class Game
   def turn
     puts "Enter the coordinate for your shot (i.e. 'A1'):"
     guess = gets.chomp.upcase
-    until @ai_board.valid_coordinate?(guess) && !@ai_board.cells[guess].fired_upon?
+    until @ai_board.valid_coordinate?(guess) && \
+      !@ai_board.cells[guess].fired_upon?
       puts "Invalid guess. Please try again."
       guess = gets.chomp.upcase
     end
     @ai_board.cells[guess].fire_upon
 
-    player_result = if @ai_board.cells[guess].empty?
+    player_result =
+     if @ai_board.cells[guess].empty?
                       "miss."
-                    elsif @ai_board.cells[guess].empty? == false && @ai_board.cells[guess].ship.sunk? == false
-                      "hit."
-                    else
-                      "hit and sunk! The computer's #{@ai_board.cells[guess].ship.name} is sunk."
-                    end
+      elsif @ai_board.cells[guess].empty? == false && \
+            @ai_board.cells[guess].ship.sunk? == false
+         "hit."
+      else
+        "hit and sunk! The computer's #{@ai_board.cells[guess].ship.name} is sunk."
+      end
 
     comp_guess = @player_board.cells.keys.sample
     while @player_board.cells[comp_guess].fired_upon?
@@ -137,13 +133,15 @@ class Game
     @player_board.cells[comp_guess].fire_upon
     system 'clear'
 
-    comp_result = if @player_board.cells[comp_guess].empty? == true
-              "miss."
-            elsif @player_board.cells[comp_guess].empty? == false && @player_board.cells[comp_guess].ship.sunk? == false
-              "hit"
-            else
-              "hit and sunk! Your #{@player_board.cells[comp_guess].ship.name} is sunk."
-            end
+    comp_result =
+      if @player_board.cells[comp_guess].empty? == true
+        "miss."
+      elsif @player_board.cells[comp_guess].empty? == false && \
+            @player_board.cells[comp_guess].ship.sunk? == false
+            "hit"
+      else
+        "hit and sunk! Your #{@player_board.cells[comp_guess].ship.name} is sunk."
+      end
 
     puts "Your shot on #{guess} was a #{player_result}\n"+
     "My shot on #{comp_guess} was a #{comp_result}"
