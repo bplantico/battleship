@@ -38,16 +38,16 @@ class Game
     "Please input three coordinates for the cruiser (i.e. 'A1 A2 A3'):"
 
     puts @player_board.render
-    cruiser_position = gets.chomp.upcase.split(" ").sort
+    cruiser_position = gets.chomp.upcase.split(" ")
 
     until cruiser_position.all?{|coord| player_board.valid_coordinate?(coord)}
       puts "Not all of those coordinates are on the board. Please try again."
-      cruiser_position = gets.chomp.upcase.split(" ").sort
+      cruiser_position = gets.chomp.upcase.split(" ")
     end
 
     until  player_board.valid_placement?(@player_cruiser, cruiser_position)
       puts "Those coordinates are invalid coordinates. Please try again."
-      cruiser_position = gets.chomp.upcase.split(" ").sort
+      cruiser_position = gets.chomp.upcase.split(" ")
     end
 
     puts "Cruiser placed!"
@@ -57,16 +57,16 @@ class Game
     puts @player_board.render(true)
 
     puts "Please input two coordinates for the submarine (i.e. 'A1 A2'):"
-    sub_position = gets.chomp.upcase.split(" ").sort
+    sub_position = gets.chomp.upcase.split(" ")
 
     until sub_position.all?{ |coord| player_board.valid_coordinate?(coord) }
       puts "Not all of those coordinates are on the board. Please try again."
-      sub_position = gets.chomp.upcase.split(" ").sort
+      sub_position = gets.chomp.upcase.split(" ")
     end
 
     until  player_board.valid_placement?(@player_submarine, sub_position)
       puts "Those coordinates are invalid coordinates. Please try again."
-      sub_position = gets.chomp.upcase.split(" ").sort
+      sub_position = gets.chomp.upcase.split(" ")
     end
 
     puts "Submarine placed!"
@@ -77,7 +77,7 @@ class Game
     p "=============COMPUTER BOARD============="
     @ai_board.cpu_place(@ai_cruiser)
     @ai_board.cpu_place(@ai_submarine)
-    puts @ai_board.render(true)
+    puts @ai_board.render
 
     p "=============PLAYER BOARD============="
     puts @player_board.render(true)
@@ -152,7 +152,7 @@ class Game
     puts @ai_board.render
 
     p "==============PLAYER BOARD=============="
-    puts @player_board.render
+    puts @player_board.render(true)
   end
 
   def reset

@@ -21,7 +21,7 @@ class BoardTest < Minitest::Test
 
   def test_if_coordinate_valid
     board = Board.new
-# require "pry"; binding.pry
+
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
     assert_equal false, board.valid_coordinate?("A5")
@@ -80,8 +80,6 @@ class BoardTest < Minitest::Test
     assert board.valid_placement?(submarine, ["A1", "A2"])
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
-
-  # PLACING SHIPS
 
   def test_place_ship_method
     board = Board.new
