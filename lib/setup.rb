@@ -17,10 +17,12 @@ class Game
   end
 
   def main_menu
+    reset
     puts "Welcome to BATTLESHIP
     Enter p to play. Enter q to quit."
     input = gets.chomp.downcase
     if input == "p"
+      system 'clear'
       setup
     else
       puts "GOODBYE"
@@ -28,6 +30,8 @@ class Game
   end
 
   def setup
+    player_board = Board.new
+    ai_board = Board.new
     puts "I have laid out my ships on the grid.\n" +
     "You now need to lay out your two ships.\n" +
     "The Cruiser is three units long and the Submarine is two units long.\n" +
@@ -47,6 +51,7 @@ class Game
     end
 
     puts "Cruiser placed!"
+    sleep(2)
     @player_board.place(@player_cruiser, cruiser_position)
     system 'clear'
     puts @player_board.render(true)
@@ -65,12 +70,14 @@ class Game
     end
 
     puts "Submarine placed!"
+    sleep(2)
     @player_board.place(@player_submarine, sub_position)
     system 'clear'
+
     p "=============COMPUTER BOARD============="
     @ai_board.cpu_place(@ai_cruiser)
     @ai_board.cpu_place(@ai_submarine)
-    puts @ai_board.render
+    puts @ai_board.render(true)
 
     p "=============PLAYER BOARD============="
     puts @player_board.render(true)
@@ -97,6 +104,8 @@ class Game
       puts "You lose!"
       sleep(2)
       main_menu
+      @ai_board.initialize
+      @player_board.initialize
     end
 
   end
@@ -112,10 +121,10 @@ class Game
 
     player_result = if @ai_board.cells[guess].empty?
                       "miss."
-                    elsif @ai_board.cells[guess].empty? == false # && @ai_board.cells[guess].ship.sunk?
+                    elsif @ai_board.cells[guess].empty? == false && @ai_board.cells[guess].ship.sunk? == false
                       "hit."
                     else
-                      "hit and sunk."
+                      "hit and sunk! The computer's #{@ai_board.cells[guess].ship.name} is sunk."
                     end
 
     comp_guess = @player_board.cells.keys.sample
@@ -127,25 +136,32 @@ class Game
 
     comp_result = if @player_board.cells[comp_guess].empty? == true
               "miss."
-            elsif @player_board.cells[comp_guess].empty? == false # && @player_board.cells[comp_guess].sunk?
+            elsif @player_board.cells[comp_guess].empty? == false && @player_board.cells[comp_guess].ship.sunk? == false
               "hit"
             else
-              "hit and sunk!"
+              "hit and sunk! Your #{@player_board.cells[comp_guess].ship.name} is sunk."
             end
-
 
     puts "Your shot on #{guess} was a #{player_result}\n"+
     "My shot on #{comp_guess} was a #{comp_result}"
     sleep(4)
 
-    puts @ai_board.render(true)
+    puts @ai_board.render
     system 'clear'
     p "=============COMPUTER BOARD============="
     puts @ai_board.render
 
     p "==============PLAYER BOARD=============="
-    puts @player_board.render(true)
+    puts @player_board.render
+  end
 
+  def reset
+    @player_board = Board.new
+    @ai_board = Board.new
+    @player_cruiser = Ship.new("Cruiser", 3)
+    @player_submarine = Ship.new("Submarine", 2)
+    @ai_cruiser = Ship.new("Cruiser", 3)
+    @ai_submarine = Ship.new("Submarine", 2)
   end
 
 end
