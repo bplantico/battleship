@@ -37,7 +37,10 @@ class Game
     "The Cruiser is three units long and the Submarine is two units long.\n" +
     "Please input three coordinates for the cruiser (i.e. 'A1 A2 A3'):"
 
-    puts @player_board.render
+
+
+    puts @player_board.render(true)
+
     cruiser_position = gets.chomp.upcase.split(" ")
 
     until  cruiser_position.all?{|coord| player_board.valid_coordinate?(coord)}\
