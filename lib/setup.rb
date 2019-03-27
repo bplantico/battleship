@@ -146,13 +146,13 @@ class Game
     "My shot on #{comp_guess} was a #{comp_result}"
     sleep(4)
 
-    puts @ai_board.render(true)
+    puts @ai_board.render
     system 'clear'
     p "=============COMPUTER BOARD============="
-    puts @ai_board.render(true)
+    puts @ai_board.render
 
     p "==============PLAYER BOARD=============="
-    puts @player_board.render(true)
+    puts @player_board.render
   end
 
   def reset
