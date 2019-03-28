@@ -8,28 +8,31 @@ class Game
               :ai_board
 
   def initialize
-    @player_board = Board.new
-    @ai_board = Board.new
-    @player_cruiser = Ship.new("Cruiser", 3)
-    @player_submarine = Ship.new("Submarine", 2)
-    @ai_cruiser = Ship.new("Cruiser", 3)
-    @ai_submarine = Ship.new("Submarine", 2)
+
   end
 
   def main_menu
     reset
     puts "Welcome to BATTLESHIP
-    Enter p to play. Enter q to quit."
+    Enter e to play easy mode, or h to play hard mode. Enter q to quit."
     input = gets.chomp.downcase
-    if input == "p"
+    if input == "e"
       system 'clear'
+      sleep(2)
+      puts "Easy mode selected."
       setup
+    elsif input == "h"
+      system 'clear'
+      sleep(2)
+      puts "Hard mode selected."
+      setup(hard)
     else
       puts "GOODBYE"
     end
   end
 
-  def setup
+  def setup(mode = easy)
+
     player_board = Board.new
     ai_board = Board.new
     puts "I have laid out my ships on the grid.\n" +
@@ -99,7 +102,6 @@ class Game
       @ai_board.initialize
       @player_board.initialize
     end
-
   end
 
   def turn
@@ -141,7 +143,7 @@ class Game
 
     puts "Your shot on #{guess} was a #{player_result}\n"+
     "My shot on #{comp_guess} was a #{comp_result}"
-    sleep(4)
+    sleep(2)
 
     puts @ai_board.render
     system 'clear'
