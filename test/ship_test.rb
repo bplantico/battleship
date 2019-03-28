@@ -1,7 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
-require './lib/ship'
+require './test/test_helper'
+
 
 class ShipTest < MiniTest::Test
 
@@ -26,7 +27,6 @@ class ShipTest < MiniTest::Test
   end
 
   def test_ship_sunk
-
   refute @cruiser.sunk?
   end
 

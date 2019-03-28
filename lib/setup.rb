@@ -14,6 +14,7 @@ class Game
     @player_submarine = Ship.new("Submarine", 2)
     @ai_cruiser = Ship.new("Cruiser", 3)
     @ai_submarine = Ship.new("Submarine", 2)
+    
   end
 
   def main_menu
@@ -114,7 +115,7 @@ class Game
 
     player_result =
      if @ai_board.cells[guess].empty?
-                      "miss."
+         "miss."
       elsif @ai_board.cells[guess].empty? == false && \
             @ai_board.cells[guess].ship.sunk? == false
          "hit."

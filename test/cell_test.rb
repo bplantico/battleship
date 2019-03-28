@@ -1,8 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'pry'
-require './lib/ship'
-require './lib/cell'
+require './test/test_helper'
+
 
 class CellTest < MiniTest::Test
   def test_it_exists
