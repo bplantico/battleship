@@ -141,7 +141,7 @@ class Game
 
     puts "Your shot on #{guess} was a #{player_result}\n"+
     "My shot on #{comp_guess} was a #{comp_result}"
-    sleep(4)
+    sleep(2)
 
     puts @ai_board.render
     system 'clear'
