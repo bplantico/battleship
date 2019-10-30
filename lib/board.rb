@@ -1,5 +1,6 @@
 class Board
   attr_reader :cells
+
   def initialize
     @cells = create_cells
   end
@@ -20,25 +21,23 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    if coordinates.count == ship.length && coordinates.all? do |coord|
-      @cells[coord].empty?
-      end
+    if coordinates.count == ship.length && coordinates.all? { |coord| @cells[coord].empty? }
 
       letters = []
       numbers = []
 
       coordinates.each do |coord|
-          letters << coord[0]
-          numbers << coord.scan(/\d+/).join.to_i
-
+        letters << coord[0]
+        numbers << coord.scan(/\d+/).join.to_i
       end
 
+      # horizontal & vertical consecutivensss
       if letters.uniq.length == 1
-          numbers.each_cons(2).all?{|x, y| y == x + 1}
-        elsif numbers.uniq.length == 1
-          letters.each_cons(2).all?{|x, y| y.ord == x.ord + 1}
-        else
-          return  false
+        numbers.each_cons(2).all?{|x, y| y == x + 1}
+      elsif numbers.uniq.length == 1
+        letters.each_cons(2).all?{|x, y| y.ord == x.ord + 1}
+      else
+        return  false
       end
     else
       return false

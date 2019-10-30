@@ -26,8 +26,7 @@ class ShipTest < MiniTest::Test
   end
 
   def test_ship_sunk
-
-  refute @cruiser.sunk?
+    refute @cruiser.sunk?
   end
 
   def test_hit_method_reduces_health
